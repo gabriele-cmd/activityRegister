@@ -1,5 +1,4 @@
 #include "Activity.h"
-#include "Activity.h"
 #include <QTime>
 #include <QString>
 
@@ -18,13 +17,13 @@ QTime Activity::getEndTime() const {
 }
 
 //Setters implementation
-QString Activity::setDescription(int desc) {
+void Activity::setDescription(QString desc) {
     description = desc;
 }
-QTime Activity::setStartTime(int start) {
+void Activity::setStartTime(QTime start) {
     startTime = start;
 }
-QTime Activity::setEndTime(int end) {
+void Activity::setEndTime(QTime end) {
     endTime = end;
 }
 
