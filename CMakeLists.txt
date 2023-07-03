@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(activityRegister main.cpp Activity.cpp Activity.h Register.cpp Register.h MainWindow.cpp MainWindow.h Activity.cpp)
+add_executable(activityRegister main.cpp Activity.cpp Activity.h Register.cpp Register.h MainWindow.cpp MainWindow.h Activity.cpp NewActivityWindow.cpp NewActivityWindow.h ListActivityWindow.cpp ListActivityWindow.h)
 target_link_libraries(activityRegister
         Qt::Core
         Qt::Gui

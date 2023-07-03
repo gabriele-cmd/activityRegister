@@ -1,10 +1,10 @@
 #include "Register.h"
 
-void Register::addActivity(QDate& d, Activity& a){
+void Register::addActivity(QDate d, Activity& a){
     activities.insert(d, a);
 }
 
-void Register::removeActivity(Activity& a){
+void Register::removeActivity(Activity a){
     for(auto it = activities.begin(); it != activities.end(); it++){
         if(it.value() == a)
             activities.erase(it);
@@ -30,4 +30,14 @@ QString Register::getDescripiton(Activity& a) const{
         if(it.value() == a)
             return it.value().getDescription();
     }
+}
+
+bool Register::isNotActivity(const QDate &date){
+    if(this->activities.count(date) == 0)
+        return true;
+    return false;
+}
+
+QMultiMap<QDate, Activity> Register::getActivities() const{
+    return activities;
 }

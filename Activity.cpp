@@ -3,7 +3,7 @@
 #include <QString>
 
 //Constructor implementation
-Activity::Activity(QString desc, QTime st, QTime et) : description(desc), startTime(st), endTime(et) {} //initializion list
+Activity::Activity(QString desc, QTime st, QTime et, QDate d) : description(desc), startTime(st), endTime(et), date(d) {} //initializion list
 
 //Getters implementation
 QString Activity::getDescription() const {
@@ -15,6 +15,12 @@ QTime Activity::getStartTime() const {
 QTime Activity::getEndTime() const {
     return endTime;
 }
+QDate Activity::getDate() const {
+    return date;
+}
+Activity Activity::getActivity() const {
+    return *this;
+}
 
 //Setters implementation
 void Activity::setDescription(QString desc) {
@@ -25,6 +31,9 @@ void Activity::setStartTime(QTime start) {
 }
 void Activity::setEndTime(QTime end) {
     endTime = end;
+}
+void Activity::setDate(QDate d) {
+    date = d;
 }
 
 //Overloading Operators implementation
