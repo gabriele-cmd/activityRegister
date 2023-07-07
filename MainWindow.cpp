@@ -1,4 +1,6 @@
 #include "MainWindow.h"
+#include "NewActivityWindow.h"
+#include "ListActivityWindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
         this->setFixedSize(600,600);
@@ -31,14 +33,14 @@ MainWindow::~MainWindow(){
 }
 
 void MainWindow::clickedAddActivity() {
-    NewActivityWindow newActivityWindow(nullptr, aRegister);
+    NewActivityWindow newActivityWindow(nullptr, &activityRegister);
     newActivityWindow.setWindowTitle("New Activity");
     newActivityWindow.setWindowIcon(QIcon("../image/iconNewActivityWindow.png"));
     newActivityWindow.exec();
 }
 
 void MainWindow::clickedListActivity(QDate date){
-    ListActivityWindow listActivityWindow(nullptr, date, aRegister);
+    ListActivityWindow listActivityWindow(nullptr, date, &activityRegister);
     listActivityWindow.setWindowTitle("List Activity");
     listActivityWindow.setWindowIcon(QIcon("../image/listActivityWindow.png"));
 
