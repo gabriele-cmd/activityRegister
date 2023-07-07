@@ -30,6 +30,7 @@ QString Register::getDescripiton(Activity& a) const{
         if(it.value() == a)
             return it.value().getDescription();
     }
+    return "ATTIVITA' NON TROVATA";
 }
 
 bool Register::isNotActivity(const QDate &date){

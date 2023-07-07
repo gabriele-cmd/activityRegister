@@ -35,15 +35,35 @@ MainWindow::~MainWindow(){
 void MainWindow::clickedAddActivity() {
     NewActivityWindow newActivityWindow(nullptr, &activityRegister);
     newActivityWindow.setWindowTitle("New Activity");
-    newActivityWindow.setWindowIcon(QIcon("../image/iconNewActivityWindow.png"));
+    //newActivityWindow.setWindowIcon(QIcon("../image/iconNewActivityWindow.png"));
     newActivityWindow.exec();
 }
 
 void MainWindow::clickedListActivity(QDate date){
     ListActivityWindow listActivityWindow(nullptr, date, &activityRegister);
     listActivityWindow.setWindowTitle("List Activity");
-    listActivityWindow.setWindowIcon(QIcon("../image/listActivityWindow.png"));
+    //listActivityWindow.setWindowIcon(QIcon("../image/listActivityWindow.png"));
 
     listActivityWindow.exec();
-
 }
+
+/*
+void MainWindow::clickedRemoveActivity(){
+    QMessageBox messageBox;
+    messageBox.setWindowTitle("Warning!");
+    messageBox.setText("Are you sure you want to delete this activity?");
+    messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    messageBox.setDefaultButton(QMessageBox::No);
+    int ret = messageBox.exec();
+
+    switch (ret) {
+        case QMessageBox::Yes:
+            activityRegister.removeActivity();
+            break;
+        case QMessageBox::No:
+            break;
+        default:
+            break;
+    }
+}
+ */

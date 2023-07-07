@@ -19,8 +19,8 @@ public:
 
 private slots:
     void clickedAddActivity();
-    void clickedRemoveActivity();
-    void clickedFindActivity();
+    //void clickedRemoveActivity();
+    //void clickedFindActivity();
     void clickedListActivity(QDate date);
 
 private:
