@@ -21,14 +21,20 @@ public:
     ListActivityWindow(QWidget *parent = nullptr, QDate date = QDate::currentDate(), Register *r = nullptr);
     ~ListActivityWindow();
 
-private:
+signals:
+    void newActivityClicked(QDate date);
+
+private slots:
     void createEmptyLabel();
+    void handleNewActivityClicked();
 
 private:
     QLabel *labelListActivity;
     QLabel *labelDate;
     QScrollArea *scrollAreaListActivity;
     QWidget *qWidget;
+
+    QDate selectedDate;
 
 };
 
