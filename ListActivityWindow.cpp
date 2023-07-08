@@ -76,11 +76,11 @@ ListActivityWindow::ListActivityWindow(QWidget *parent, QDate date, Register *r)
             buttonDelete->setFixedSize(60, 40);
             connect(buttonDelete, &QPushButton::clicked, this, [this, groupBox, r, activity, date]() {
                 r->removeActivity(activity.getActivity());
+                delete groupBox;
                 if (r->isNotActivity(date)) {
                     delete this->scrollAreaListActivity;
                     this->createEmptyLabel();
                 }
-                delete groupBox;
             });
             vbox->addWidget(buttonDelete);
             groupBox->setLayout(vbox);
