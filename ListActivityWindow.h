@@ -26,7 +26,7 @@ signals:
 
 private slots:
     void createEmptyLabel();
-    void handleNewActivityClicked();
+    //void handleNewActivityClicked();
 
 private:
     QLabel *labelListActivity;
@@ -34,7 +34,7 @@ private:
     QScrollArea *scrollAreaListActivity;
     QWidget *qWidget;
 
-    QDate selectedDate;
+    //QDate selectedDate;
 
 };
 

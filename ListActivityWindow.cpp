@@ -10,7 +10,7 @@ ListActivityWindow::ListActivityWindow(QWidget *parent, QDate date, Register *r)
     QFont fontLabelListActivity("Arial", 15, QFont::Bold);
     labelListActivity->setFont(fontLabelListActivity);
     labelListActivity->move(175 ,40);
-    labelListActivity->setStyleSheet("* { color:red }");
+    labelListActivity->setStyleSheet("* { color:purple }");
 
     //date of the activities
     QString s = "Date:   ";
@@ -26,72 +26,72 @@ ListActivityWindow::ListActivityWindow(QWidget *parent, QDate date, Register *r)
     if(r->isNotActivity(date)){ //se non ci sono attività presenti in quella data
         createEmptyLabel();
     }else {
-
         //scroll area
         scrollAreaListActivity = new QScrollArea(this);
         scrollAreaListActivity->setFixedSize(480, 350);
         scrollAreaListActivity->move(10, 140);
         scrollAreaListActivity->setWidgetResizable(true);
         scrollAreaListActivity->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-        qWidget= new QWidget(this);
-
+        scrollAreaListActivity->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        qWidget = new QWidget(this);
         QGridLayout *gridLayout = new QGridLayout(qWidget);
 
-        QGroupBox *groupBox;
-        QVBoxLayout *vbox;
-        QPushButton *buttonDelete;
-        QString stringDate, stringStartTime, stringEndTime;
-        QLabel *labelStartTime, *labelEndTime, *labelDescription;
+        std::vector<Activity> sortedActivities; //vector that stores all the activites
+
+        for (auto it : r->getActivities()) { //storing...
+            if (it.getDate() == date) {
+                sortedActivities.push_back(it);
+            }
+        }
+
+        //sorts the activites by starting time this way new activities are inserted in the right order
+        std::sort(sortedActivities.begin(), sortedActivities.end(), [](const Activity& a1, const Activity& a2) {
+            return a1.getStartTime() < a2.getStartTime();
+        });
 
         int i = 0;
-        for (auto it : r->getActivities()) {
+        for (const auto& activity : sortedActivities) {
+            QGroupBox *groupBox = new QGroupBox(this);
+            QVBoxLayout *vbox = new QVBoxLayout(groupBox);
 
-            if(it.getDate() == date) {
-                vbox = new QVBoxLayout;
+            QString stringStartTime = "Starting time: ";
+            stringStartTime += QString(activity.getStartTime().toString("hh:mm"));
+            QLabel *labelStartTime = new QLabel(stringStartTime);
+            labelStartTime->setFont(fontLabel);
+            vbox->addWidget(labelStartTime);
 
-                //label ora di inizio
-                stringStartTime = "Starting time: ";
-                stringStartTime += QString(it.getStartTime().toString("hh:mm"));
-                labelStartTime = new QLabel(stringStartTime);
-                labelStartTime->setFont(fontLabel);
-                vbox->addWidget(labelStartTime);
+            QString stringEndTime = "End time: ";
+            stringEndTime += QString(activity.getEndTime().toString("hh:mm"));
+            QLabel *labelEndTime = new QLabel(stringEndTime);
+            labelEndTime->setFont(fontLabel);
+            vbox->addWidget(labelEndTime);
 
-                //label ora di fine
-                stringEndTime = "End time: ";
-                stringEndTime += QString(it.getEndTime().toString("hh:mm"));
-                labelEndTime = new QLabel(stringEndTime);
-                labelEndTime->setFont(fontLabel);
-                vbox->addWidget(labelEndTime);
+            QLabel *labelDescription = new QLabel("Description: " + activity.getDescription());
+            labelDescription->setWordWrap(true);
+            labelDescription->setMaximumWidth(412);
+            labelDescription->setFont(fontLabel);
+            vbox->addWidget(labelDescription);
 
-                //label descrizione
-                labelDescription = new QLabel("Description:\n" + it.getDescription());
-                labelDescription->setWordWrap(true);
-                labelDescription->setMaximumWidth(412);
-                labelDescription->setFont(fontLabel);
-                vbox->addWidget(labelDescription);
-
-                //button delete
-                buttonDelete = new QPushButton((QIcon("../image/deleteActivity.png")), "");
-                buttonDelete->setFixedSize(32, 32);
-                connect(buttonDelete, &QPushButton::clicked, this, [this, groupBox, r, it, date]() {
-                    r->removeActivity(it.getActivity());
-                    delete groupBox;
-                    if (r->isNotActivity(date)) {
-                        delete this->scrollAreaListActivity;
-                        this->createEmptyLabel();
-                    }
-
-                });
-                vbox->addWidget(buttonDelete);
-                groupBox->setLayout(vbox);
-                gridLayout->addWidget(groupBox, i++, 0);
-            }
-
+            QPushButton *buttonDelete = new QPushButton("Delete", this);
+            buttonDelete->setFixedSize(60, 40);
+            connect(buttonDelete, &QPushButton::clicked, this, [this, groupBox, r, activity, date]() {
+                r->removeActivity(activity.getActivity());
+                if (r->isNotActivity(date)) {
+                    delete this->scrollAreaListActivity;
+                    this->createEmptyLabel();
+                }
+                delete groupBox;
+            });
+            vbox->addWidget(buttonDelete);
+            groupBox->setLayout(vbox);
+            gridLayout->addWidget(groupBox, i++, 0);
         }
+
         scrollAreaListActivity->setWidget(qWidget);
     }
 
+
+    /*
     auto buttonNewActivity = new QPushButton("New Activity", this);
     QFont fontButtonNewActivity("Arial", 10);
     buttonNewActivity->setFont(fontButtonNewActivity);
@@ -101,7 +101,9 @@ ListActivityWindow::ListActivityWindow(QWidget *parent, QDate date, Register *r)
     //connecting signal to slot
     connect(&mainWindow, SIGNAL(newActivityClicked(QDate)), this, SLOT(clickedAddActivity(QDate)));
     this->selectedDate = date;
-    connect(buttonNewActivity, SIGNAL(clicked()), parent, SLOT(handleNewActivityClicked()));
+    // Emit the newActivityClicked signal when buttonNewActivity is clicked
+    connect(buttonNewActivity, SIGNAL(clicked()), this, SLOT(handleNewActivityClicked()));
+    //connect(buttonNewActivity, SIGNAL(clicked()), parent, SLOT(handleNewActivityClicked()));*/
 
 }
 ListActivityWindow::~ListActivityWindow() {
@@ -111,11 +113,12 @@ ListActivityWindow::~ListActivityWindow() {
 
 void ListActivityWindow::createEmptyLabel() {
     QLabel *labelEmpty = new QLabel("There are no activities in this date", this);
-    QFont fontLabelEmpty("Arial", 11, QFont::Bold);
+    QFont fontLabelEmpty("Arial", 13, QFont::Bold);
     labelEmpty->setFont(fontLabelEmpty);
-    labelEmpty->move(10, 140);
+    labelEmpty->move(10, 160);
 }
 
-void ListActivityWindow::handleNewActivityClicked() {
+/*void ListActivityWindow::handleNewActivityClicked() {
     emit newActivityClicked(selectedDate);
-}
+    close();
+}*/
