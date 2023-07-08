@@ -17,19 +17,21 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-signals:
-    void newActivityClicked(QDate date);
+/*signals:
+    void newActivityClicked(QDate date);*/
 
 private slots:
     void clickedAddActivity();
-    void clickedAddActivity(QDate date);
+    void clickedListActivity(QDate date);
+
+    //UNIMPLEMENTED
+    //void clickedAddActivity(QDate date);
     //void clickedRemoveActivity();
     //void clickedFindActivity();
-    void clickedListActivity(QDate date);
-    void handleNewActivityClicked();
+    //void handleNewActivityClicked(QDate date);
 
 private:
-    Register activityRegister;
+    Register* activityRegister;
     QCalendarWidget *calendar;
     QPushButton* addActButton;
     QPushButton* deleteActButton;
