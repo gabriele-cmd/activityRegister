@@ -62,7 +62,7 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, Register *r) : QDialog(par
     buttonOk->setFont(fontButtonOk);
     buttonOk->move(450,575);
     connect(buttonOk, &QPushButton::clicked, this, [r, this](){
-        if(this->activityCheck(dateEditNewActivity, timeEditStartTime, timeEditEndTime, textEditDescriptionActivity)){
+        if(NewActivityWindow::activityCheck(r, dateEditNewActivity, timeEditStartTime, timeEditEndTime, textEditDescriptionActivity)){
             Activity a(textEditDescriptionActivity->toPlainText(), timeEditStartTime->time(), timeEditEndTime->time(), dateEditNewActivity->date());
 
             r->addActivity(dateEditNewActivity->date(), a);
@@ -147,7 +147,7 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, QDate date, Register *r) {
     buttonOk->setFont(fontButtonOk);
     buttonOk->move(450,575);
     connect(buttonOk, &QPushButton::clicked, this, [r, this](){
-        if(this->activityCheck(dateEditNewActivity, timeEditStartTime, timeEditEndTime, textEditDescriptionActivity)){
+        if(NewActivityWindow::activityCheck(r,dateEditNewActivity, timeEditStartTime, timeEditEndTime, textEditDescriptionActivity)){
             Activity a(textEditDescriptionActivity->toPlainText(), timeEditStartTime->time(), timeEditEndTime->time(), dateEditNewActivity->date());
 
             r->addActivity(dateEditNewActivity->date(), a);
@@ -183,26 +183,45 @@ NewActivityWindow::~NewActivityWindow() {
     delete buttonCancel;
 }
 
-bool NewActivityWindow::activityCheck(QDateEdit *date, QTimeEdit *sT, QTimeEdit *eT, QTextEdit *description) {
+bool NewActivityWindow::activityCheck(Register* r, QDateEdit *date, QTimeEdit *sT, QTimeEdit *eT, QTextEdit *description) {
     QMessageBox messageBox;
     messageBox.setWindowTitle("Error");
 
-    if(date->date().isNull()){
+    //checkin if date is valid
+    if(date->date().isNull() || date->date().year() > 2100 || date->date().year() < QDate::currentDate().year() || date->date().month() < QDate::currentDate().month() || date->date().day() < QDate::currentDate().day()){
         messageBox.setText("Date is not correct!");
         messageBox.exec();
         return false;
     }
 
+    //checking if start and ending times are not the same and if end time is not after start time
     if(eT->time()<sT->time() || (eT->time().hour() == sT->time().hour() && eT->time().minute() == sT->time().minute())){
         messageBox.setText("Times are not correct!");
         messageBox.exec();
         return false;
     }
 
+    //description is mandatory, checking if it has been given
     if(description->toPlainText().isEmpty()){
         messageBox.setText("Description is not correct!");
         messageBox.exec();
         return false;
+    }
+
+    for (const auto& it : r->getActivities()) {
+        if (it.getDate() == date->date() && ((sT->time() >= it.getStartTime() && sT->time() <= it.getEndTime()) || (eT->time() >= it.getStartTime() && eT->time() <= it.getEndTime()) || (sT->time() <= it.getStartTime() && eT->time() >= it.getEndTime()))) {
+            QMessageBox confirmBox;
+            confirmBox.setWindowTitle("Warning");
+            confirmBox.setText("Seems like you are already busy during this time!\nAre you sure you want to add a new activity?");
+            confirmBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            confirmBox.setDefaultButton(QMessageBox::No);
+            int choice = confirmBox.exec();
+            if (choice == QMessageBox::No) {
+                return false;
+            } else {
+                break; // exit the loop if the user chooses to proceed
+            }
+        }
     }
     return true;
 }
