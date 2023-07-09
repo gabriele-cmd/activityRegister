@@ -12,3 +12,4 @@ modules.xml
 vcs.xml
 workspace.xml
 cmake-build-debug
+google-googletest
