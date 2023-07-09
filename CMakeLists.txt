@@ -7,7 +7,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_PREFIX_PATH "C:\\Qt\\6.5.1\\mingw_64\\lib\\cmake\\Qt6")
 set(Qt6_DIR "C:\\Qt\\6.5.1\\mingw_64\\lib\\cmake\\Qt6")
-set(GTEST_DIR "C:\\Users\\chirl\\Documents\\CLion_Projects\\activityRegister\\google-googletest\\googletest")
+set(GTEST_DIR "C:\\Users\\chirl\\Documents\\CLion_Projects\\google-googletest\\googletest")
 include_directories(${GTEST_DIR}/include ${GTEST_DIR})
 set(TEST_SOURCE_FILES test/runAllTests.cpp test/TestActivity.cpp test/TestRegister.cpp)
 
