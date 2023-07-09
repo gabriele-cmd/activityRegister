@@ -1,7 +1,7 @@
 #ifndef ACTIVITYREGISTER_REGISTER_H
 #define ACTIVITYREGISTER_REGISTER_H
 
-#include"QList"
+#include "QList"
 #include <QFile>
 #include <QTextStream>
 #include <memory>
@@ -15,10 +15,10 @@ public:
 
     void addActivity(QDate d, Activity& a);
     void removeActivity(Activity a);
-    bool findActivity(Activity& a) const;
-    bool isNotActivity(const QDate &date);
-    void listActivities(QDate& d) const;
-    QString getDescripiton(Activity& a) const;
+    bool findActivity(Activity& a) const; //unused
+    bool isNotActivity(const QDate &date); //isEmpty check for a specific date
+    void listActivities(QDate& d) const; //unused
+    QString getDescripiton(Activity& a) const;//unused
 
     QMultiMap<QDate, Activity> getActivities() const;
 

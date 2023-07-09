@@ -7,7 +7,7 @@
 class Activity {
 public:
     //Constructor
-    Activity(QString desc, QTime st, QTime et, QDate d);
+    Activity(QString desc, QTime st, QTime et, QDate d); //solving
     //Destructor
     ~Activity() = default;
 
