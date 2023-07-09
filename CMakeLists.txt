@@ -7,6 +7,9 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_PREFIX_PATH "C:\\Qt\\6.5.1\\mingw_64\\lib\\cmake\\Qt6")
 set(Qt6_DIR "C:\\Qt\\6.5.1\\mingw_64\\lib\\cmake\\Qt6")
+set(GTEST_DIR "C:\\Users\\chirl\\Documents\\CLion_Projects\\activityRegister\\google-googletest\\googletest")
+include_directories(${GTEST_DIR}/include ${GTEST_DIR})
+set(TEST_SOURCE_FILES test/runAllTests.cpp test/TestActivity.cpp test/TestRegister.cpp)
 
 set(CMAKE_WIN32_EXECUTABLE ON)
 
@@ -23,12 +26,16 @@ add_executable(activityRegister
         MainWindow.cpp MainWindow.h
         NewActivityWindow.cpp NewActivityWindow.h
         ListActivityWindow.cpp ListActivityWindow.h
-)
+        ${TEST_SOURCE_FILES}
+        )
 
 target_link_libraries(activityRegister PRIVATE
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        gtest
+        gtest_main
+        core
         )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
