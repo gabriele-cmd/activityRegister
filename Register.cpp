@@ -19,20 +19,6 @@ bool Register::findActivity(Activity& a) const{
     return false;
 }
 
-void Register::listActivities(QDate& d) const{
-    auto range = activities.equal_range(d);
-    for (auto it = range.first; it != range.second; ++it) {
-        qDebug() << "Date: " << it.key() << ", Activity: " << it.value().getDescription();
-    }
-}
-QString Register::getDescripiton(Activity& a) const{
-    for(auto it = activities.begin(); it != activities.end(); it++){
-        if(it.value() == a)
-            return it.value().getDescription();
-    }
-    return "ATTIVITA' NON TROVATA";
-}
-
 bool Register::isNotActivity(const QDate &date){
     if(this->activities.count(date) == 0)
         return true;

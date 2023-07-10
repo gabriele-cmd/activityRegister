@@ -1,8 +1,8 @@
 #include "NewActivityWindow.h"
 
 NewActivityWindow::NewActivityWindow(QWidget *parent, Register *r) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint){
-    this->setFixedSize(500,625); //dimensione fissa della finestra
-    this->setWindowTitle("New Activity"); //titolo della finestra
+    this->setFixedSize(500,625);
+    this->setWindowTitle("New Activity");
 
     labelNewActivity = new QLabel("New Activity",this);
     labelNewActivity->setFixedWidth(400);
@@ -10,7 +10,7 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, Register *r) : QDialog(par
     labelNewActivity->setFont(fontLabelNewActivity);
     labelNewActivity->move(170,30);
 
-    //data della nuova attività
+    //new activity date
     labelDate = new QLabel("Date: ", this);
     QFont fontLabelDate("Arial", 11);
     labelDate->setFont(fontLabelDate);
@@ -22,7 +22,7 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, Register *r) : QDialog(par
     dateEditNewActivity->setFont(fontDateEdit);
     dateEditNewActivity->move(135,98);
 
-    //orario inizio attività
+    //new activity starting time
     labelStartTime = new QLabel("Starting time: ", this);
     QFont fontLabelStartTime("Arial", 11);
     labelStartTime->setFont(fontLabelStartTime);
@@ -33,7 +33,7 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, Register *r) : QDialog(par
     timeEditStartTime->setFont(fontTimeEdit);
     timeEditStartTime->move(135,148);
 
-    //orario fine attività
+    //new activity ending time
     labelEndTime = new QLabel("End time: ", this);
     QFont fontLabelEndTime("Arial", 11);
     labelEndTime->setFont(fontLabelEndTime);
@@ -43,7 +43,7 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, Register *r) : QDialog(par
     timeEditEndTime->setFont(fontTimeEdit);
     timeEditEndTime->move(135, 198);
 
-    //descrizione attività
+    //new activity description
     labelDescriptionActivity = new QLabel("Description activity: ", this);
     QFont fontLabelDescriptionActivity("Arial", 11);
     labelDescriptionActivity->setFont(fontLabelDescriptionActivity);
@@ -54,8 +54,8 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, Register *r) : QDialog(par
     textEditDescriptionActivity->setFont(fontTextEditDescriptionActivity);
     textEditDescriptionActivity->move(10,325);
 
-    //bottone ok
-    buttonOk = new QPushButton("Ok", this);
+    //OK button
+    buttonOk = new QPushButton("OK", this);
     buttonOk->setFixedSize(40,40);
 
     QFont fontButtonOk("Arial", 10);
@@ -70,8 +70,8 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, Register *r) : QDialog(par
         }
     });
 
-    //bottone cancel
-    buttonCancel = new QPushButton("Cancel", this);
+    //CANCEL button
+    buttonCancel = new QPushButton("CANCEL", this);
     buttonCancel->setFixedSize(70, 40);
     connect(buttonCancel, &QPushButton::clicked, this, [this](){
         this->close();
@@ -86,8 +86,8 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, Register *r) : QDialog(par
 
 //constructor with date as parameter
 NewActivityWindow::NewActivityWindow(QWidget *parent, QDate date, Register *r) {
-    this->setFixedSize(500,625); //dimensione fissa della finestra
-    this->setWindowTitle("New Activity"); //titolo della finestra
+    this->setFixedSize(500,625);
+    this->setWindowTitle("New Activity");
 
     labelNewActivity = new QLabel("New Activity",this);
     labelNewActivity->setFixedWidth(400);
@@ -95,7 +95,7 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, QDate date, Register *r) {
     labelNewActivity->setFont(fontLabelNewActivity);
     labelNewActivity->move(170,30);
 
-    //data della nuova attività
+    //new activity date
     labelDate = new QLabel("Date: ", this);
     QFont fontLabelDate("Arial", 11);
     labelDate->setFont(fontLabelDate);
@@ -107,7 +107,7 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, QDate date, Register *r) {
     dateEditNewActivity->setFont(fontDateEdit);
     dateEditNewActivity->move(135,98);
 
-    //orario inizio attività
+    //new activity starting time
     labelStartTime = new QLabel("Starting time: ", this);
     QFont fontLabelStartTime("Arial", 11);
     labelStartTime->setFont(fontLabelStartTime);
@@ -118,7 +118,7 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, QDate date, Register *r) {
     timeEditStartTime->setFont(fontTimeEdit);
     timeEditStartTime->move(135,148);
 
-    //orario fine attività
+    //new activity ending time
     labelEndTime = new QLabel("End time: ", this);
     QFont fontLabelEndTime("Arial", 11);
     labelEndTime->setFont(fontLabelEndTime);
@@ -128,7 +128,7 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, QDate date, Register *r) {
     timeEditEndTime->setFont(fontTimeEdit);
     timeEditEndTime->move(135, 198);
 
-    //descrizione attività
+    //new activity description
     labelDescriptionActivity = new QLabel("Description activity: ", this);
     QFont fontLabelDescriptionActivity("Arial", 11);
     labelDescriptionActivity->setFont(fontLabelDescriptionActivity);
@@ -139,8 +139,8 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, QDate date, Register *r) {
     textEditDescriptionActivity->setFont(fontTextEditDescriptionActivity);
     textEditDescriptionActivity->move(10,325);
 
-    //bottone ok
-    buttonOk = new QPushButton("Ok", this);
+    //OK button
+    buttonOk = new QPushButton("OK", this);
     buttonOk->setFixedSize(40,40);
 
     QFont fontButtonOk("Arial", 10);
@@ -155,8 +155,8 @@ NewActivityWindow::NewActivityWindow(QWidget *parent, QDate date, Register *r) {
         }
     });
 
-    //bottone cancel
-    buttonCancel = new QPushButton("Cancel", this);
+    //CANCEL button
+    buttonCancel = new QPushButton("CANCEL", this);
     buttonCancel->setFixedSize(70, 40);
     connect(buttonCancel, &QPushButton::clicked, this, [this](){
         this->close();

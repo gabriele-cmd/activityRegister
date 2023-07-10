@@ -31,12 +31,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
         buttonRemoveActivity->move(450,550);
 
         connect(buttonNewActivity, SIGNAL(clicked()), this, SLOT(clickedAddActivity()));
-        //connect(buttonNewActivity, SIGNAL(clicked()), this, SLOT(handleNewActivityClicked()));
-        //connect(buttonRemoveActivity, SIGNAL(clicked()), this, SLOT(clickedRemoveActivity()));
-
-        // Connect the newActivityClicked signal from ListActivityWindow to clickedAddActivity slot in MainWindow
-        //auto* listActivityWindow = new ListActivityWindow(nullptr, calendar->selectedDate(), &activityRegister);
-        //connect(listActivityWindow, SIGNAL(newActivityClicked(QDate)), this, SLOT(clickedAddActivity(QDate)));
 }
 MainWindow::~MainWindow(){
     delete calendar;
@@ -54,34 +48,3 @@ void MainWindow::clickedListActivity(QDate date){
     listActivityWindow.setWindowTitle("List Activity");
     listActivityWindow.exec();
 }
-
-/*void MainWindow::clickedAddActivity(QDate date) {
-    NewActivityWindow newActivityWindow(nullptr, date, &activityRegister);
-    newActivityWindow.setWindowTitle("New Activity");
-    newActivityWindow.exec();
-}*/
-
-/*
-void MainWindow::clickedRemoveActivity(){
-    QMessageBox messageBox;
-    messageBox.setWindowTitle("Warning!");
-    messageBox.setText("Are you sure you want to delete this activity?");
-    messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    messageBox.setDefaultButton(QMessageBox::No);
-    int ret = messageBox.exec();
-
-    switch (ret) {
-        case QMessageBox::Yes:
-            activityRegister.removeActivity();
-            break;
-        case QMessageBox::No:
-            break;
-        default:
-            break;
-    }
-}
- */
-
-/*void MainWindow::handleNewActivityClicked(QDate date) {
-    clickedAddActivity(date);
-}*/

@@ -18,7 +18,7 @@ public:
     QDate getDate() const;
     Activity getActivity() const; //returns itself
 
-    //Setters
+    //Setters (NEVER USED)
     void setDescription(QString desc);
     void setStartTime(QTime start);
     void setEndTime(QTime end);

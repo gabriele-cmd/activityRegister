@@ -89,22 +89,6 @@ ListActivityWindow::ListActivityWindow(QWidget *parent, QDate date, Register *r)
 
         scrollAreaListActivity->setWidget(qWidget);
     }
-
-
-    /*
-    auto buttonNewActivity = new QPushButton("New Activity", this);
-    QFont fontButtonNewActivity("Arial", 10);
-    buttonNewActivity->setFont(fontButtonNewActivity);
-    buttonNewActivity->move(370,440);
-
-    MainWindow mainWindow;
-    //connecting signal to slot
-    connect(&mainWindow, SIGNAL(newActivityClicked(QDate)), this, SLOT(clickedAddActivity(QDate)));
-    this->selectedDate = date;
-    // Emit the newActivityClicked signal when buttonNewActivity is clicked
-    connect(buttonNewActivity, SIGNAL(clicked()), this, SLOT(handleNewActivityClicked()));
-    //connect(buttonNewActivity, SIGNAL(clicked()), parent, SLOT(handleNewActivityClicked()));*/
-
 }
 ListActivityWindow::~ListActivityWindow() {
     delete labelListActivity;
@@ -117,8 +101,3 @@ void ListActivityWindow::createEmptyLabel() {
     labelEmpty->setFont(fontLabelEmpty);
     labelEmpty->move(10, 160);
 }
-
-/*void ListActivityWindow::handleNewActivityClicked() {
-    emit newActivityClicked(selectedDate);
-    close();
-}*/
