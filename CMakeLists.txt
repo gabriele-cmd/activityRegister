@@ -6,12 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_PREFIX_PATH "C:\\Qt\\6.5.1\\mingw_64\\lib\\cmake\\Qt6")
 set(Qt6_DIR "C:\\Qt\\6.5.1\\mingw_64\\lib\\cmake\\Qt6")
-set(GTEST_DIR "C:\\Users\\chirl\\Documents\\CLion_Projects\\google-googletest\\googletest")#.
-include_directories(${GTEST_DIR}/include ${GTEST_DIR})
-set(TEST_SOURCE_FILES test/runAllTests.cpp test/TestActivity.cpp test/TestRegister.cpp)
-link_directories(${GTEST_DIR}/src)
 
 set(CMAKE_WIN32_EXECUTABLE ON)
 
@@ -21,23 +18,33 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(activityRegister
-        main.cpp
+add_subdirectory(test)
+
+set(SOURCES main.cpp
         Activity.cpp Activity.h
         Register.cpp Register.h
         MainWindow.cpp MainWindow.h
         NewActivityWindow.cpp NewActivityWindow.h
         ListActivityWindow.cpp ListActivityWindow.h
-        ${TEST_SOURCE_FILES}
         )
+
+add_executable(activityRegister
+        main.cpp
+        ${SOURCES}
+        )
+
+add_library(core ${SOURCES})
 
 target_link_libraries(activityRegister PRIVATE
         Qt::Core
         Qt::Gui
         Qt::Widgets
-        gtest
-        gtest_main
-        core
+        )
+
+target_link_libraries(core PRIVATE
+        Qt::Core
+        Qt::Gui
+        Qt::Widgets
         )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
