@@ -21,14 +21,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
         //button for new activity
         auto buttonNewActivity = new QPushButton("New Activity", this);
         QFont fontButtonNewActivity("Arial", 10);
-        buttonNewActivity->setFont(fontButtonNewActivity);
-        buttonNewActivity->move(340,550);
 
-        //button for removing activity
-        auto buttonRemoveActivity = new QPushButton("Remove Activity", this);
-        QFont fontButtonRemoveActivity("Arial", 10);
-        buttonRemoveActivity->setFont(fontButtonRemoveActivity);
-        buttonRemoveActivity->move(450,550);
+        buttonNewActivity->setFont(fontButtonNewActivity);
+        buttonNewActivity->move(450,550);
+        buttonNewActivity->setStyleSheet("* { color: rgb(16, 72, 255); }");
 
         connect(buttonNewActivity, SIGNAL(clicked()), this, SLOT(clickedAddActivity()));
 }

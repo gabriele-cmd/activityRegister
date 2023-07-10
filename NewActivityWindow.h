@@ -14,7 +14,7 @@
 class NewActivityWindow : public QDialog {
 
 Q_OBJECT
-//all good
+
 public:
     explicit NewActivityWindow(QWidget *parent = nullptr, Register *r = nullptr);
     explicit NewActivityWindow(QWidget *parent = nullptr, QDate date = QDate::currentDate(), Register *r = nullptr);
