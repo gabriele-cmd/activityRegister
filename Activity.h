@@ -1,5 +1,5 @@
-#ifndef ACTIVITYREGISTER_ACTIVITY_H
-#define ACTIVITYREGISTER_ACTIVITY_H
+#ifndef AREGISTER_ACTIVITY_H
+#define AREGISTER_ACTIVITY_H
 
 #include <QTime>
 #include <QString>
@@ -7,7 +7,7 @@
 class Activity {
 public:
     //Constructor
-    Activity(QString desc, QTime st, QTime et, QDate d); //solving
+    Activity(QString desc, QTime st, QTime et, QDate d);
     //Destructor
     ~Activity() = default;
 
@@ -36,4 +36,4 @@ private:
 };
 
 
-#endif //ACTIVITYREGISTER_ACTIVITY_H
+#endif //AREGISTER_ACTIVITY_H
