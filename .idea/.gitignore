@@ -1,6 +1,10 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/aRegister.iml
+/misc.xml
+/modules.xml
+/vcs.xml
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
@@ -12,4 +16,3 @@ modules.xml
 vcs.xml
 workspace.xml
 cmake-build-debug
-google-googletest
