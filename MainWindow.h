@@ -14,8 +14,8 @@ class MainWindow : public QMainWindow {
 Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
 private slots:
     void clickedAddActivity();
@@ -24,8 +24,6 @@ private slots:
 private:
     Register* activityRegister;
     QCalendarWidget *calendar;
-    QPushButton* addActButton;
-    QPushButton* deleteActButton;
 
 };
 

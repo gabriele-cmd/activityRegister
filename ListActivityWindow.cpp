@@ -3,27 +3,27 @@
 
 ListActivityWindow::ListActivityWindow(QWidget *parent, QDate date, Register *r) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint) {
 
-    this->setFixedSize(500,500);
+    this->setFixedSize(500,600);
+    this->move(520,81);
+    this->setStyleSheet("* { color:purple }");
 
     //list of activities
     labelListActivity = new QLabel("List Activity", this);
-    QFont fontLabelListActivity("Arial", 15, QFont::Bold);
+    QFont fontLabelListActivity("Arial", 17, QFont::Bold);
     labelListActivity->setFont(fontLabelListActivity);
-    labelListActivity->move(175 ,40);
-    labelListActivity->setStyleSheet("* { color:purple }");
+    labelListActivity->move(185 ,40);
 
     //date of the activities
     QString s = "Date:   ";
     s += QString(date.toString("dd/MM/yyyy"));
     labelDate = new QLabel(s, this);
-    QFont fontLabelDate("Arial", 11);
+    QFont fontLabelDate("Arial", 12);
     labelDate->setFont(fontLabelDate);
     labelDate->move(10,100);
 
     QFont fontLabel("Arial", 10);
-    QFont fontTitle("Arial", 11, QFont::Bold);
 
-    if(r->isNotActivity(date)){ //se non ci sono attività presenti in quella data
+    if(r->isNotActivity(date)){ //if there are no activities on that date
         createEmptyLabel();
     }else {
         //scroll area
@@ -74,6 +74,8 @@ ListActivityWindow::ListActivityWindow(QWidget *parent, QDate date, Register *r)
 
             QPushButton *buttonDelete = new QPushButton("Delete", this);
             buttonDelete->setFixedSize(60, 40);
+            buttonDelete->setStyleSheet("* { color: red }");
+
             connect(buttonDelete, &QPushButton::clicked, this, [this, groupBox, r, activity, date]() {
                 r->removeActivity(activity.getActivity());
                 delete groupBox;
@@ -97,7 +99,8 @@ ListActivityWindow::~ListActivityWindow() {
 
 void ListActivityWindow::createEmptyLabel() {
     QLabel *labelEmpty = new QLabel("There are no activities in this date", this);
-    QFont fontLabelEmpty("Arial", 13, QFont::Bold);
+    QFont fontLabelEmpty("Arial", 16, QFont::Bold);
     labelEmpty->setFont(fontLabelEmpty);
-    labelEmpty->move(10, 160);
+    labelEmpty->move(80, 180);
+    labelEmpty->setStyleSheet("* { color: red }");
 }
