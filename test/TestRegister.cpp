@@ -2,12 +2,14 @@
 #include <gtest/gtest.h>
 #include <iostream>
 
-TEST(TestRegister, testRegisterIsEmpty){
+//testing empty registers
+TEST(TestRegister, testRegisterIsNotActivity){
     Register r;
 
     ASSERT_TRUE(r.isNotActivity(QDate(2023,7,9)));
 }
 
+//testing not empty registers
 TEST(TestRegister, testRegisterIsNotEmpty){
     Register r;
     Activity *a = new Activity("Descrizione", QTime(12,00), QTime(13,00), QDate(2023,7,9));
@@ -16,6 +18,7 @@ TEST(TestRegister, testRegisterIsNotEmpty){
     ASSERT_FALSE(r.isNotActivity(a->getDate()));
 }
 
+//testing add and remove activities features
 TEST(TestRegister, testRegisterAddActivity) {
     Register *r = new Register();
     Activity *a1 = new Activity("Descrizione1", QTime(12,00), QTime(13,00), QDate(2023,7,9));

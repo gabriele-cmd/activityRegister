@@ -36,7 +36,7 @@ void Activity::setDate(QDate d) {
     date = d;
 }
 
-//Overloading Operators implementation
+//Overloading Operators implementations
 bool Activity::operator==(const Activity &right) const {
     if(description == right.getDescription() && startTime == right.getStartTime() && endTime == right.getEndTime())
         return true;

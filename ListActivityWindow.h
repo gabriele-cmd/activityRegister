@@ -18,24 +18,17 @@ class ListActivityWindow : public QDialog {
 Q_OBJECT
 
 public:
-    ListActivityWindow(QWidget *parent = nullptr, QDate date = QDate::currentDate(), Register *r = nullptr);
-    ~ListActivityWindow();
-
-signals:
-    void newActivityClicked(QDate date);
+    explicit ListActivityWindow(QWidget *parent = nullptr, QDate date = QDate::currentDate(), Register *r = nullptr);
+    ~ListActivityWindow() override;
 
 private slots:
     void createEmptyLabel();
-    //void handleNewActivityClicked();
 
 private:
     QLabel *labelListActivity;
     QLabel *labelDate;
     QScrollArea *scrollAreaListActivity;
     QWidget *qWidget;
-
-    //QDate selectedDate;
-
 };
 
 
