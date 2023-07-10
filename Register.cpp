@@ -11,14 +11,6 @@ void Register::removeActivity(Activity a){
     }
 }
 
-bool Register::findActivity(Activity& a) const{
-    for(auto it = activities.begin(); it != activities.end(); it++){
-        if(it.value() == a)
-            return true;
-    }
-    return false;
-}
-
 bool Register::isNotActivity(const QDate &date){
     if(this->activities.count(date) == 0)
         return true;
